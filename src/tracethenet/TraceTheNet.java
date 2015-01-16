@@ -16,6 +16,13 @@ public class TraceTheNet {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+        //CheckPing : check if the website exits
+        System.out.println(ConnectionCheck.checkPing("google.fr"));
+        TraceRoute trace = new TraceRoute("google.fr", false);
+        //trace.execute();
+        
     }
     
 }
