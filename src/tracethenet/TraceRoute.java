@@ -19,11 +19,14 @@ public class TraceRoute {
     private String address;
     private boolean ssh;
     private SSH sshObject;
+    private boolean ping;
     
     public TraceRoute (String addressTmp, boolean sshh)
     {
         address = addressTmp;
         ssh = sshh;
+        ping = false;
+        sshObject = new SSH("195.154.68.197", "thibault", "sarazasaraza");
     }
     
     /**
@@ -41,11 +44,28 @@ public class TraceRoute {
      */
     public boolean executeSSH()
     {
-        sshObject = new SSH("195.154.68.197", "thibault", "sarazasaraza");
-        if(!sshObject.checkServer()) return false;
+       
+        if(!ping)
+        {
+            if(!sshObject.checkServer()) return false;
+        }
+        
         result = sshObject.executeCmd("traceroute " + address);
         sshObject.closeSSH();
         return true;
+    }
+    
+    /**
+     * Check ping of the current address
+     * @return true if okay, false elseif
+     */
+    public boolean checkPing()
+    {
+        if(ssh)
+            ping = sshObject.checkServer();
+        else
+            ping = ConnectionCheck.checkPing(address);
+        return ping;
     }
     
     /**
@@ -60,10 +80,19 @@ public class TraceRoute {
         {
             //If problem with SSH connection, we will use the standard connection
             if(executeSSH())
-            return true;
-            System.out.println("Problem with SSH, try with standard conenction");
+                return true;
+            System.out.println("Problem with SSH, try with standard connection");
         }
         
+        if(!ping)
+        {
+            if(!ConnectionCheck.checkPing(address))
+            {
+                System.out.println("No ping, Do you have Internet ?");
+                return false;
+            }
+        }
+
         StringBuffer output = new StringBuffer();
         Runtime rt = Runtime.getRuntime();
         try
@@ -71,7 +100,7 @@ public class TraceRoute {
             Process pr = rt.exec(getTracerouteCmd() + " " + address);
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            String line = "";			
+            String line;			
             while ((line = reader.readLine())!= null) 
             {
 		output.append(line).append("\n");
@@ -101,13 +130,10 @@ public class TraceRoute {
     /**
      * Set ssh booean
      * @param value New value for SSH
-     * @return true if no problem, false else if
      */
-    public boolean setSSH(boolean value)
+    public void setSSH(boolean value)
     {
         ssh = value;
-        if(result.isEmpty()) return false;
-        return true;
     }
     
     /**

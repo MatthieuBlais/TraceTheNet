@@ -19,9 +19,13 @@ public class TraceTheNet {
         
         
         //CheckPing : check if the website exits and if we have internet
-        System.out.println(ConnectionCheck.checkPing("google.fr"));
-        TraceRoute trace = new TraceRoute("google.fr", false);
-        trace.execute();
+        TraceRoute trace = new TraceRoute("google.fr", true);
+        if(trace.checkPing())
+        {
+            trace.execute();
+            trace.printResult();
+        }
+
         
     }
     

@@ -74,7 +74,7 @@ public class SSH {
      */
     public String executeCmd(String cmd)
     {
-        StringBuffer result = null;
+        StringBuffer result = new StringBuffer();
 	try
 	{
             /* Create a session */
@@ -92,10 +92,9 @@ public class SSH {
             while (true)
             {
 		String line = br.readLine();
-                result.append(line).append("/n");
 		if (line == null)
                     break;
-		System.out.println(line);
+                result.append(line).append("\n");
             }
 
             /* Show exit status, if available (otherwise "null") */
