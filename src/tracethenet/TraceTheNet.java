@@ -18,10 +18,10 @@ public class TraceTheNet {
         // TODO code application logic here
         
         
-        //CheckPing : check if the website exits
+        //CheckPing : check if the website exits and if we have internet
         System.out.println(ConnectionCheck.checkPing("google.fr"));
         TraceRoute trace = new TraceRoute("google.fr", false);
-        //trace.execute();
+        trace.execute();
         
     }
     
