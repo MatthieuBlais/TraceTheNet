@@ -6,7 +6,8 @@
 package tracethenet;
 
 /**
- *
+ * Main class of the program.
+ * Contain the main
  * @author matt
  */
 public class TraceTheNet {
@@ -16,17 +17,14 @@ public class TraceTheNet {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        
+
         //CheckPing : check if the website exits and if we have internet
         TraceRoute trace = new TraceRoute("google.fr", true);
         if(trace.checkPing())
         {
             trace.execute();
             trace.printResult();
+            trace.parse();
         }
-
-        
     }
-    
 }

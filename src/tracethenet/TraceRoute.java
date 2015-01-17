@@ -9,18 +9,24 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 /**
- *
+ * Manage traceroute command
  * @author Thibault
  */
 public class TraceRoute {
     
-    private String result;
-    ArrayList<Route> retour;
+    private ArrayList<String> resultArray;
+    ArrayList<Route> resultRouteArray;
     private String address;
     private boolean ssh;
-    private SSH sshObject;
+    private final SSH sshObject;
     private boolean ping;
+    private ParseTraceroute parseResult;
     
+    /**
+     * Constructor
+     * @param addressTmp Address choosen
+     * @param sshh Boolean if SSH needed
+     */
     public TraceRoute (String addressTmp, boolean sshh)
     {
         address = addressTmp;
@@ -41,16 +47,15 @@ public class TraceRoute {
     
     /**
      * Execute the traceroute but in SSH
+     * @return true if okay, false if error occured
      */
     public boolean executeSSH()
     {
-       
         if(!ping)
         {
             if(!sshObject.checkServer()) return false;
         }
-        
-        result = sshObject.executeCmd("traceroute " + address);
+        resultArray = sshObject.executeCmd("traceroute " + address);
         sshObject.closeSSH();
         return true;
     }
@@ -93,17 +98,17 @@ public class TraceRoute {
             }
         }
 
-        StringBuffer output = new StringBuffer();
         Runtime rt = Runtime.getRuntime();
         try
         {
             Process pr = rt.exec(getTracerouteCmd() + " " + address);
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            String line;			
+            String line;
+            resultArray = new ArrayList<>();
             while ((line = reader.readLine())!= null) 
             {
-		output.append(line).append("\n");
+                resultArray.add(line);
             }
         }
         catch(IOException exception) 
@@ -111,20 +116,22 @@ public class TraceRoute {
             System.out.println(exception);
             return false; 
         }
-        
-        result = output.toString();
-        
         return true;
     }
     
     /**
      * Parse the result of the traceroute cmd
-     * @return an arrayList with all route in an arraylist
+     * @return false if error occured, true if no error
      */
-    public ArrayList<Route> parse()
+    public boolean parse()
     {
-       retour = new ArrayList<>();
-       return retour;
+        resultRouteArray = new ArrayList<>();
+        if("windows".equals(OS.getOperatingSystemType()) && !ssh)
+            parseResult = new ParseTracerouteWindows(resultArray);
+        else 
+            parseResult = new ParseTracerouteLinux(resultArray);
+         
+        return parseResult.parse();
     }
     
     /**
@@ -150,6 +157,8 @@ public class TraceRoute {
      */
     public void printResult()
     {
-        System.out.println(result);
+        for (String resultArray1 : resultArray) {
+            System.out.println(resultArray1);
+        }
     }
 }

@@ -6,10 +6,8 @@
 package tracethenet;
 
 /**
- * Interface of route
+ * No route (failed)
  * @author Thibault
  */
-public interface Route {
-
-    
+public class RouteFail  implements Route {
 }

@@ -12,8 +12,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 /**
- *
+ * Create a SSH connection and execute a command
  * @author Thibault
  */
 public class SSH {
@@ -72,9 +73,9 @@ public class SSH {
      * @param cmd The command
      * @return The result of the command
      */
-    public String executeCmd(String cmd)
+    public ArrayList<String> executeCmd(String cmd)
     {
-        StringBuffer result = new StringBuffer();
+        ArrayList<String> resultArray = new ArrayList<>();
 	try
 	{
             /* Create a session */
@@ -94,7 +95,7 @@ public class SSH {
 		String line = br.readLine();
 		if (line == null)
                     break;
-                result.append(line).append("\n");
+                resultArray.add(line);
             }
 
             /* Show exit status, if available (otherwise "null") */
@@ -108,7 +109,7 @@ public class SSH {
             e.printStackTrace(System.err);
             System.exit(2);
 	}
-        return result.toString();
+        return resultArray;
     }
     
     /**
