@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *
+ * Check pig allows to check if the user has internet and if the address is correct
  * @author Thibault
  */
 public class ConnectionCheck {

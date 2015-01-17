@@ -6,7 +6,7 @@
 package tracethenet;
 
 /**
- *
+ * Allows the program to get the OS of the current user
  * @author Thibault
  */
 public class OS {
