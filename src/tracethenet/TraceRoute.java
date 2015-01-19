@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class TraceRoute {
     
     private ArrayList<String> resultArray;
-    ArrayList<Route> resultRouteArray;
     private String address;
     private boolean ssh;
     private final SSH sshObject;
@@ -125,7 +124,6 @@ public class TraceRoute {
      */
     public boolean parse()
     {
-        resultRouteArray = new ArrayList<>();
         if("windows".equals(OS.getOperatingSystemType()) && !ssh)
             parseResult = new ParseTracerouteWindows(resultArray);
         else 
@@ -160,5 +158,14 @@ public class TraceRoute {
         for (String resultArray1 : resultArray) {
             System.out.println(resultArray1);
         }
+    }
+    
+    /**
+     * Get parse result
+     * @return The ParseTraceroute object
+     */
+    public ParseTraceroute getParseResult()
+    {
+        return parseResult;
     }
 }

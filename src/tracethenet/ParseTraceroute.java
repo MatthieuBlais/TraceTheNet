@@ -73,6 +73,15 @@ public class ParseTraceroute {
     }
     
     /**
+     * Get number of lines
+     * @return The numbre of lines
+     */
+    public int getResultSize()
+    {
+        return resultRoute.size();
+    }
+    
+    /**
      * Parse finction whcih will be overidden foor Linux an Windows
      * @return True if no erreir, false if error occured
      */
