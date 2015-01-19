@@ -33,7 +33,7 @@ public class ParseTracerouteLinux extends ParseTraceroute{
         
         int line = 0;
         
-        for (int j = 4; j<input.size(); j++) 
+        for (int j = 1; j<input.size(); j++) 
         {
             int i =0;
             int step = 0;
