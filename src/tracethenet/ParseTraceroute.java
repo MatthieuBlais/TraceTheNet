@@ -82,6 +82,29 @@ public class ParseTraceroute {
     }
     
     /**
+     * If a step of a route has failed
+     * @param step The step (line)
+     * @param number wich oof the three try ?
+     * @return true if failed, false else if
+     */
+    public boolean hasFailed(int step, int number)
+    {
+        return resultRoute.get(step).get(number) instanceof RouteFail;
+    }
+    
+    /**
+     * All three of route failed ?
+     * @param step The step of traceroute
+     * @return true if all failed, false else is
+     */
+    public boolean allFailed(int step)
+    {
+        return resultRoute.get(step).get(0) instanceof RouteFail && 
+                resultRoute.get(step).get(1) instanceof RouteFail &&
+                resultRoute.get(step).get(2) instanceof RouteFail;
+    }
+    
+    /**
      * Parse finction whcih will be overidden foor Linux an Windows
      * @return True if no erreir, false if error occured
      */
