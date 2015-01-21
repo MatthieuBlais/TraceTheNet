@@ -5,6 +5,11 @@
  */
 package tracethenet;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tracethenet.Interface.Frame;
+
 /**
  * Main class of the program.
  * Contain the main
@@ -17,8 +22,9 @@ public class TraceTheNet {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
-        //CheckPing : check if the website exits and if we have internet
+        try {
+            // TODO code application logic here
+            //CheckPing : check if the website exits and if we have internet
         TraceRoute trace = new TraceRoute("google.fr", true);
         if(trace.checkPing())
         {
@@ -26,6 +32,10 @@ public class TraceTheNet {
             trace.printResult();
             trace.parse();
             int nbResult = trace.getParseResult().getResultSize();
+        }
+            Frame window = new Frame();
+        } catch (IOException ex) {
+            Logger.getLogger(TraceTheNet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
