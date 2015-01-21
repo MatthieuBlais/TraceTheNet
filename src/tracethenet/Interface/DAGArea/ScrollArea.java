@@ -19,4 +19,8 @@ public class ScrollArea extends JScrollPane{
         setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
+    
+    public void clear(){
+        
+    }
 }

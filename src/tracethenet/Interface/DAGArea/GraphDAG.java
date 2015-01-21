@@ -5,11 +5,24 @@
  */
 package tracethenet.Interface.DAGArea;
 
+
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.DAGLayout;
+import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.VisualizationImageServer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -18,44 +31,102 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 public class GraphDAG {
 
     private Graph<Node, Link> g;
-    //List node
-    //Liste linj
-    
+    private ArrayList<Node> node;
+    private ArrayList<Link> link;
+    private int counter;
+    private JPanel panel;
     
     public GraphDAG() {
-
+        g = new  DirectedSparseMultigraph<Node, Link>();
+        node = new ArrayList<Node>();
+        link = new ArrayList<Link>();
+        counter = 0;
+        panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
     }
 
-    public void constructGraph() {
+    public JPanel constructGraph(ArrayList<String> list) {
+        addBranch(list);
+        Layout<Node, Link> layout = new CircleLayout<>(g);
+        VisualizationViewer<Node, Link> vv = new VisualizationViewer<Node, Link>(layout);
+        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.setBorder(new EmptyBorder(50, 50, 50, 50));
+        panel.removeAll();
+        panel.setBackground(Color.WHITE);
+        panel.add("Center", vv);
+        return panel;
+    }
+    
+    public boolean isNodeExist(Node nd){
+        Node tmp;
+        for(int i=0; i<node.size(); i++){
+            tmp = node.get(i);
+            if(tmp.toString().equals(nd.toString()))
+                return true;
+        }
+        return false;
+    }
+    
+    public Node getNodeExist(Node nd){
+        Node tmp;
+        for(int i=0; i<node.size(); i++){
+            tmp = node.get(i);
+            if(tmp.toString().equals(nd.toString()))
+                return tmp;
+        }
+        return nd;
+    }
+    
+    public boolean isLinkExist(Link lk){
+        Link tmp;
+        for (int i=0; i<link.size(); i++){
+            tmp = link.get(i);
+            if(tmp.toString().equals(lk.toString()))
+                return true;
+        }
+        return false;
+    }
+    
+    
+    public boolean addEdge(String ip1, String ip2){
+        Node nd1 = new Node(counter, ip1);
+        Node nd2 = new Node(counter+1,ip2);
+        counter+=2;
+        Link lk = new Link(nd1, nd2);
+        if (isLinkExist(lk))
+            return false;
+        else{
+            if(isNodeExist(nd1))
+                nd1 = getNodeExist(nd1);
+            else
+                node.add(nd1);
+            
+            if(isNodeExist(nd2))
+                nd2 = getNodeExist(nd2);
+            else
+                node.add(nd2);
+            
+            link.add(lk);
+            
+            g.addEdge(lk, nd1, nd2);
+            return true;
+        }
+        
+    }
+    
+    public void addBranch(ArrayList<String> list){
+        for (int i=0; i<(list.size()-1); i++){
+            addEdge(list.get(i), list.get(i+1));
+        }
+    }
+    
+    public void clearGraph(){
+        node.clear();
+        link.clear();
+        counter = 0;
         g = new  SparseMultigraph<Node, Link>();
-        // Create some MyNode objects to use as vertices
-       /* n1 = new MyNode(1);
-        n2 = new MyNode(2);
-        n3 = new MyNode(3);
-        n4 = new MyNode(4);
-        n5 = new MyNode(5); // note n1-n5 declared elsewhere.
-        // Add some directed edges along with the vertices to the graph
-        g.addEdge(new MyLink(2.0, 48), n1, n2, EdgeType.DIRECTED); // This method
-        g.addEdge(new MyLink(2.0, 48), n2, n3, EdgeType.DIRECTED);
-        g.addEdge(new MyLink(3.0, 192), n3, n5, EdgeType.DIRECTED);
-        g.addEdge(new MyLink(2.0, 48), n5, n4, EdgeType.DIRECTED); // or we can use
-        g.addEdge(new MyLink(2.0, 48), n4, n2); // In a directed graph the
-        g.addEdge(new MyLink(2.0, 48), n3, n1); // first node is the source 
-        g.addEdge(new MyLink(10.0, 48), n2, n5);// and the second the destination*/
     }
-    
-    //if node already exist, return node
-    
-    //if link already exist, return false
-    
-    //recoit tableau IP, pour taille tableau
-    //                  vérifie si lien exist : vrai on passe au prochain, faux 
-    //                                  vérifie si le noeud 1 existe. Si oui get node, si non créer node
-    //                                  verifie si noeud 2 existe. Si oui, get node, si non créer node
-    //                                  creation lien
-    //                                  addEdge
-    //                                  addList node
-    //                                  add link
     
 
 }

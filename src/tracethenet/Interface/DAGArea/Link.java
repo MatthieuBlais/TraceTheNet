@@ -11,14 +11,17 @@ package tracethenet.Interface.DAGArea;
  */
 public class Link {
 
-    int id;
+    Node n1;
+    Node n2;
 
-    public Link(int id) {
-        this.id = id; // This is defined in the outer class.
+    public Link(Node n1, Node n2) {
+        this.n1 = n1; 
+        this.n2 = n2;
     }
 
+    @Override
     public String toString() { // Always good for debugging
-        return "Node : " + id;
+        return "Node : " + n1.toString() + " " + n2.toString();
     }
 
 }

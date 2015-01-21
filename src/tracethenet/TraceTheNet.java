@@ -25,14 +25,14 @@ public class TraceTheNet {
         try {
             // TODO code application logic here
             //CheckPing : check if the website exits and if we have internet
-        TraceRoute trace = new TraceRoute("google.fr", true);
+       /* TraceRoute trace = new TraceRoute("google.fr", true);
         if(trace.checkPing())
         {
             trace.execute();
             trace.printResult();
             trace.parse();
             int nbResult = trace.getParseResult().getResultSize();
-        }
+        }*/
             Frame window = new Frame();
         } catch (IOException ex) {
             Logger.getLogger(TraceTheNet.class.getName()).log(Level.SEVERE, null, ex);
