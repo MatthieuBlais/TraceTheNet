@@ -25,6 +25,16 @@ public class AboutAction extends AbstractAction {
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		
+		JOptionPane.showMessageDialog(window,
+                        "Do you want some help?\n\n"
+                                + "Random : Generate a random IP\n"
+                                + "Clean : Start a new graph\n"
+                                + "Trace the route : Trace the graph\n"
+                                + "Timeout : Configure a timeout for the traceroute function\n"
+                                + "Max Hosts : Configure a maximal number of host\n"
+                                + "Linux/Windows : Make the choice of your OS\n"
+                                + "SSH : Trace the route with a SSH server. Very useful at ECE\n"
+                                + "Save : Save the graph as a jpg file\n"
+                                + "Load : Load a text file with one IP number on each line\n\n");
 	}
 }
