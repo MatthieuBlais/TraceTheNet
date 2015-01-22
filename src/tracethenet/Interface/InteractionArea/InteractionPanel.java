@@ -8,6 +8,8 @@ package tracethenet.Interface.InteractionArea;
 
 import java.awt.*;
 import javax.swing.*;
+import tracethenet.Interface.DAGArea.GraphDAG;
+import tracethenet.Interface.DAGArea.MainPanel;
 
 /**
  *
@@ -16,17 +18,17 @@ import javax.swing.*;
 public class InteractionPanel extends JPanel{
     
     private GridLayout layout;
+ 
     
     
-    
-    public InteractionPanel(){
+    public InteractionPanel(MainPanel graph, JScrollPane scroll){
         
         layout = new GridLayout(0,1);
         setLayout(layout);
         setBackground(new Color(0,0,0,0));
         
         add(new HostnamePanel());
-        add(new TracePanel());
+        add(new TracePanel(graph, scroll));
 
         
     }

@@ -12,15 +12,27 @@ import javax.swing.JScrollPane;
  *
  * @author Matthieu Blais
  */
-public class ScrollArea extends JScrollPane{
+public class ScrollArea{
+    
+    private MainPanel panel;
+    private JScrollPane scroll;
     
     public ScrollArea(){
-        super(new MainPanel());
-        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panel = new MainPanel();
+        scroll = new JScrollPane(panel);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    }
+    
+    public JScrollPane getScroll(){
+        return scroll;
     }
     
     public void clear(){
         
+    }
+    
+    public MainPanel getGraph(){
+        return panel;
     }
 }

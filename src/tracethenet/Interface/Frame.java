@@ -21,6 +21,7 @@ public class Frame extends JFrame {
     private final int SIZEX = 1024;
     private final int SIZEY = 720;
     private final String TITLE = "TraceTheNet";
+    private final Pannel panel;
     
     public Frame() throws IOException {
         
@@ -29,10 +30,11 @@ public class Frame extends JFrame {
         setTitle(TITLE);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setJMenuBar(new BarMenu(this));
+        panel = new Pannel();
+        setJMenuBar(new BarMenu(this, panel.getMainPanel()));
 
         //Main Layout
-        add(new Pannel());
+        add(panel);
         
         setVisible(true);
     }

@@ -7,6 +7,7 @@
 package tracethenet.Interface.Menu;
 
 import javax.swing.*;
+import tracethenet.Interface.DAGArea.MainPanel;
 import tracethenet.Interface.Frame;
 
 /**
@@ -20,25 +21,35 @@ public class BarMenu extends JMenuBar {
     private final String MENU3 = "Help";
             
             
-    public BarMenu(Frame window){
+    public BarMenu(Frame window, MainPanel panel){
         super();
         
         JMenu menu1 = new JMenu(MENU1);
         JMenuItem load = new JMenuItem(new LoadAction(window, "Load"));
         menu1.add(load);
-        JMenuItem save = new JMenuItem(new SaveAction(window, "Save"));
+        JMenuItem save = new JMenuItem(new SaveAction(window, "Save", panel));
         menu1.add(save);
         JMenuItem leave = new JMenuItem(new LeaveAction(window, "Leave"));
         menu1.add(leave);
         add(menu1);
         
         JMenu menu2 = new JMenu(MENU2);
-        JMenuItem timeout = new JMenuItem(new TimeoutAction(window, "Timeout"));
+        JCheckBoxMenuItem timeout = new JCheckBoxMenuItem(new TimeoutAction(window, "Timeout"));
         menu2.add(timeout);
-        JMenuItem maxHost = new JMenuItem(new maxHostAction(window, "Max Hosts"));
+        JCheckBoxMenuItem maxHost = new JCheckBoxMenuItem(new maxHostAction(window, "Max Hosts"));
         menu2.add(maxHost);
-        JMenuItem os = new JMenuItem(new OSAction(window, "OS"));
-        menu2.add(os);
+        menu2.addSeparator();
+        ButtonGroup group = new ButtonGroup();
+        JRadioButtonMenuItem rbMenuItem = new JRadioButtonMenuItem("Windows");
+        rbMenuItem.setSelected(true);
+        group.add(rbMenuItem);
+        menu2.add(rbMenuItem);
+        rbMenuItem = new JRadioButtonMenuItem("Linux");
+        group.add(rbMenuItem);
+        menu2.add(rbMenuItem);
+        
+        
+        menu2.addSeparator();
         JCheckBoxMenuItem ssh = new JCheckBoxMenuItem(new SSH(window, "SSH"));
         menu2.add(ssh);
         add(menu2);

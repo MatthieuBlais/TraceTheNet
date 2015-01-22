@@ -51,7 +51,8 @@ public class GraphDAG {
         Layout<Node, Link> layout = new CircleLayout<>(g);
         VisualizationViewer<Node, Link> vv = new VisualizationViewer<Node, Link>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        vv.setBorder(new EmptyBorder(50, 50, 50, 50));
+        vv.setBorder(new EmptyBorder(100, 100, 100, 100));
+        vv.setBackground(Color.WHITE);
         panel.removeAll();
         panel.setBackground(Color.WHITE);
         panel.add("Center", vv);

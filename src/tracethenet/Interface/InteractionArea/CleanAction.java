@@ -7,7 +7,11 @@
 package tracethenet.Interface.InteractionArea;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.AbstractAction;
+import javax.swing.JScrollPane;
+import tracethenet.Interface.DAGArea.GraphDAG;
+import tracethenet.Interface.DAGArea.MainPanel;
 
 /**
  *
@@ -15,13 +19,22 @@ import javax.swing.AbstractAction;
  */
 public class CleanAction extends AbstractAction {
 	
- 
-	public CleanAction(String texte){
+        private MainPanel graph;
+        private JScrollPane scroll;
+        
+        
+	public CleanAction(String texte, MainPanel graph, JScrollPane scroll){
 		super(texte);
+                this.graph=graph;
+                this.scroll=scroll;
 	}
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		
+		graph.getGraph().clearGraph();
+                graph.removeAll();
+                graph.add(graph.getGraph().constructGraph(new ArrayList<String>()));
+                scroll.repaint();
+                scroll.validate();
 	}
 }

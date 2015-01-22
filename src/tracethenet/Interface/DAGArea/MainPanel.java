@@ -54,4 +54,8 @@ public class MainPanel extends JPanel{
         add(graph.constructGraph(liste));
         repaint();
     }
+    
+    public GraphDAG getGraph(){
+        return graph;
+    }
 }

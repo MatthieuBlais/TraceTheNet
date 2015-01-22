@@ -21,10 +21,15 @@ public class Pannel extends JPanel{
     private GridBagConstraints gbc;
     private final String PATH_BACKGROUND = "images/background.jpg";
     private JLabel background;
+    private InteractionPanel inter;
+    private ScrollArea scroll;
     
     public Pannel(){
        super();
         
+       scroll = new ScrollArea();
+       inter = new InteractionPanel(scroll.getGraph(),scroll.getScroll());
+       
        setSize(1024,720);
        setLayout(new BorderLayout());
        background = new JLabel(new ImageIcon(PATH_BACKGROUND));
@@ -56,7 +61,7 @@ public class Pannel extends JPanel{
         //Marge en haut, à gauche, en bas et à droite : 10
         gbc.insets = new Insets(10, 10, 10, 10); 
         //On ajoute au fond d'écran
-        background.add(new InteractionPanel(), gbc);
+        background.add(inter, gbc);
         
         //(0,0)
         gbc.gridx = 0;
@@ -73,9 +78,13 @@ public class Pannel extends JPanel{
         gbc.weighty = 0.99;
 
         //On ajoute au fond d'écran
-        background.add(new ScrollArea(), gbc);
+        background.add(scroll.getScroll(), gbc);
         
         
        
+    }
+    
+    public MainPanel getMainPanel(){
+        return scroll.getGraph();
     }
 }
