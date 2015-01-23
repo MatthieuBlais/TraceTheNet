@@ -27,9 +27,9 @@ public class BarMenu extends JMenuBar {
         JMenu menu1 = new JMenu(MENU1);
         JMenuItem load = new JMenuItem(new LoadAction(window, "Load"));
         menu1.add(load);
-        JMenuItem save = new JMenuItem(new SaveAction(window, "Save", panel));
+        JMenuItem save = new JMenuItem(new SaveAction(window, "Save as JPG", panel));
         menu1.add(save);
-        JMenuItem leave = new JMenuItem(new LeaveAction(window, "Leave"));
+        JMenuItem leave = new JMenuItem(new LeaveAction(window, "Quit"));
         menu1.add(leave);
         add(menu1);
         

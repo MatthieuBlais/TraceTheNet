@@ -9,7 +9,9 @@ package tracethenet.Interface.DAGArea;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
+import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
@@ -37,7 +39,7 @@ public class GraphDAG {
     private JPanel panel;
     
     public GraphDAG() {
-        g = new  DirectedSparseMultigraph<Node, Link>();
+        g = new  DirectedSparseGraph<Node, Link>();
         node = new ArrayList<Node>();
         link = new ArrayList<Link>();
         counter = 0;
@@ -48,14 +50,16 @@ public class GraphDAG {
 
     public JPanel constructGraph(ArrayList<String> list) {
         addBranch(list);
-        Layout<Node, Link> layout = new CircleLayout<>(g);
+        Layout<Node, Link> layout = new ISOMLayout<>(g);
         VisualizationViewer<Node, Link> vv = new VisualizationViewer<Node, Link>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        vv.setBorder(new EmptyBorder(100, 100, 100, 100));
+       // vv.setBorder(new EmptyBorder(100, 100, 100, 100));
+        
         vv.setBackground(Color.WHITE);
+        
         panel.removeAll();
         panel.setBackground(Color.WHITE);
-        panel.add("Center", vv);
+        panel.add(vv);
         return panel;
     }
     
@@ -119,6 +123,7 @@ public class GraphDAG {
     public void addBranch(ArrayList<String> list){
         for (int i=0; i<(list.size()-1); i++){
             addEdge(list.get(i), list.get(i+1));
+            
         }
     }
     

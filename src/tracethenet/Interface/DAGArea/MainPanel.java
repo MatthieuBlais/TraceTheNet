@@ -16,13 +16,13 @@ import javax.swing.*;
  */
 public class MainPanel extends JPanel{
     
-    private BorderLayout layout;
+    private FlowLayout layout;
     private GraphDAG graph;
     private ArrayList<String> str;
     
     public MainPanel(){
         graph = new GraphDAG();
-        layout = new BorderLayout();
+        layout = new FlowLayout();
         setLayout(layout);
         setBackground(Color.WHITE);
         str = new ArrayList<String>();
@@ -33,7 +33,7 @@ public class MainPanel extends JPanel{
         str.add("258");
         str.add("369");
         str.add("123");
-        str.add("456");
+
         createGraph(str);
         str.clear();
         str.add("783");
