@@ -40,7 +40,7 @@ public class ParseTracerouteLinux extends ParseTraceroute{
             ArrayList<Route> tmpRoute = new ArrayList<>();
             boolean exit = false;
             String tmpIP1 = new String(), tmpIP2 = new String();
-            while(i != input.get(j).length() && !exit)
+            while(i != input.get(j).length() && !exit )
             {
                 StringBuffer tmp = new StringBuffer();
                 while(i != input.get(j).length() && input.get(j).charAt(i) == ' ')
@@ -58,6 +58,11 @@ public class ParseTracerouteLinux extends ParseTraceroute{
                         case 0:
                             break;
                        case 1:
+                           if(tmp.toString().equals("*"))
+                           {
+                               step = 6;//No response
+                           }
+                           else
                             tmpIP1 = tmp.toString();
                            break;
                        case 2:
@@ -89,7 +94,12 @@ public class ParseTracerouteLinux extends ParseTraceroute{
                                     tmpRoute.add(new RouteSuccessOldIP(tmp.toString()));
                                 else tmpRoute.add(new RouteSuccessNewIP(tmp.toString()));;
                            break;
-
+                       case 6:
+                           tmpRoute.add(new RouteFail());
+                           tmpRoute.add(new RouteFail());
+                           tmpRoute.add(new RouteFail());
+                           exit = true;
+                           break;
                                 
                     }
                 
@@ -114,7 +124,7 @@ public class ParseTracerouteLinux extends ParseTraceroute{
                 }
                 
 
-                if(!tmp.toString().equals("ms"))
+                if(!tmp.toString().equals("ms") && step!=6)
                     step++;
             }
             line++;
