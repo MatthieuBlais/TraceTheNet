@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/InteractionArea/TraceAction.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/InteractionArea/CleanAction.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/DAGArea/GraphDAG.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/Frame.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/DAGArea/Node.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/InteractionArea/TracePanel.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/Menu/AboutAction.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/RouteSuccessNewIP.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/DAGArea/MainPanel.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/InteractionArea/HostnamePanel.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/InteractionArea/InteractionPanel.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/TraceTheNet.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/DAGArea/ScrollArea.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/Menu/SaveAction.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/DAGArea/Link.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/Menu/BarMenu.java</file>
+            <file>file:/C:/Users/Matthieu%20Blais/Documents/ECE/ECE/ING4/Java/TraceTheNet/src/tracethenet/Interface/Pannel.java</file>
+        </group>
     </open-files>
 </project-private>

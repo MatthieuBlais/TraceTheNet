@@ -84,6 +84,10 @@ public class Pannel extends JPanel{
        
     }
     
+    public JScrollPane getScroll(){
+        return scroll.getScroll();
+    }
+    
     public MainPanel getMainPanel(){
         return scroll.getGraph();
     }

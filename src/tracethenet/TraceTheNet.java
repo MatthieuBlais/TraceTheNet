@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tracethenet.Interface.Frame;
+import tracethenet.Interface.ProgressThread;
 
 /**
  * Main class of the program.
@@ -25,15 +26,24 @@ public class TraceTheNet {
         try {
             // TODO code application logic here
             //CheckPing : check if the website exits and if we have internet
-       /* TraceRoute trace = new TraceRoute("google.fr", true);
+            Frame window = new Frame();
+            ProgressThread t = new ProgressThread(window);
+            t.start();
+             
+        TraceRoute trace = new TraceRoute("google.fr", true);
+         
+        for (int i=0; i<10000; i++)
+                 System.out.println(i);
+        
         if(trace.checkPing())
         {
             trace.execute();
             trace.printResult();
             trace.parse();
             int nbResult = trace.getParseResult().getResultSize();
-        }*/
-            Frame window = new Frame();
+        }
+        t.stopp();
+          
         } catch (IOException ex) {
             Logger.getLogger(TraceTheNet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -21,12 +21,14 @@ public class BarMenu extends JMenuBar {
     private final String MENU3 = "Help";
             
             
-    public BarMenu(Frame window, MainPanel panel){
+    public BarMenu(Frame window, MainPanel panel, JScrollPane scroll){
         super();
         
         JMenu menu1 = new JMenu(MENU1);
-        JMenuItem load = new JMenuItem(new LoadAction(window, "Load"));
+        JMenuItem load = new JMenuItem(new LoadAction(window, "Load", panel, scroll));
         menu1.add(load);
+        JMenuItem savetxt = new JMenuItem(new SavetxtAction(window, "Save Graph", panel));
+        menu1.add(savetxt);
         JMenuItem save = new JMenuItem(new SaveAction(window, "Save as JPG", panel));
         menu1.add(save);
         JMenuItem leave = new JMenuItem(new LeaveAction(window, "Quit"));
@@ -34,9 +36,9 @@ public class BarMenu extends JMenuBar {
         add(menu1);
         
         JMenu menu2 = new JMenu(MENU2);
-        JCheckBoxMenuItem timeout = new JCheckBoxMenuItem(new TimeoutAction(window, "Timeout"));
+        JMenuItem timeout = new JMenuItem(new TimeoutAction(window, "Timeout"));
         menu2.add(timeout);
-        JCheckBoxMenuItem maxHost = new JCheckBoxMenuItem(new maxHostAction(window, "Max Hosts"));
+        JMenuItem maxHost = new JMenuItem(new maxHostAction(window, "Max Hosts"));
         menu2.add(maxHost);
         menu2.addSeparator();
         ButtonGroup group = new ButtonGroup();

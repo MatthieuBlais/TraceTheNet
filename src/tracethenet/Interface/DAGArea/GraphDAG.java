@@ -37,20 +37,27 @@ public class GraphDAG {
     private ArrayList<Link> link;
     private int counter;
     private JPanel panel;
+    private int cycle;
     
     public GraphDAG() {
         g = new  DirectedSparseGraph<Node, Link>();
         node = new ArrayList<Node>();
         link = new ArrayList<Link>();
         counter = 0;
+        cycle = 0;
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
     }
 
-    public JPanel constructGraph(ArrayList<String> list) {
+    public JPanel constructGraph(ArrayList<String> list, int a) {
         addBranch(list);
-        Layout<Node, Link> layout = new ISOMLayout<>(g);
+        Layout<Node, Link> layout;
+        if (a==0)
+           layout  = new ISOMLayout<>(g);
+        else
+            layout = new CircleLayout<>(g);
+            
         VisualizationViewer<Node, Link> vv = new VisualizationViewer<Node, Link>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
        // vv.setBorder(new EmptyBorder(100, 100, 100, 100));
@@ -60,6 +67,10 @@ public class GraphDAG {
         panel.removeAll();
         panel.setBackground(Color.WHITE);
         panel.add(vv);
+        return panel;
+    }
+    
+    public JPanel getPanel(){
         return panel;
     }
     
@@ -98,7 +109,7 @@ public class GraphDAG {
         Node nd1 = new Node(counter, ip1);
         Node nd2 = new Node(counter+1,ip2);
         counter+=2;
-        Link lk = new Link(nd1, nd2);
+        Link lk = new Link(nd1, nd2,cycle);
         if (isLinkExist(lk))
             return false;
         else{
@@ -125,13 +136,19 @@ public class GraphDAG {
             addEdge(list.get(i), list.get(i+1));
             
         }
+        cycle++;
     }
     
     public void clearGraph(){
         node.clear();
         link.clear();
         counter = 0;
-        g = new  SparseMultigraph<Node, Link>();
+        cycle = 0;
+        g = new  DirectedSparseGraph<Node, Link>();
+    }
+    
+    public ArrayList<Link> getAllLink(){
+        return link;
     }
     
 

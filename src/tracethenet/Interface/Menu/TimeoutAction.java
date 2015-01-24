@@ -25,6 +25,7 @@ public class TimeoutAction extends AbstractAction {
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		
+		String name = JOptionPane.showInputDialog(window,
+                        "Specify the timeout : ", null);
 	}
 }

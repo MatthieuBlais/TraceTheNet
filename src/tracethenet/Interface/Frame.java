@@ -31,7 +31,7 @@ public class Frame extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         panel = new Pannel();
-        setJMenuBar(new BarMenu(this, panel.getMainPanel()));
+        setJMenuBar(new BarMenu(this, panel.getMainPanel(), panel.getScroll()));
 
         //Main Layout
         add(panel);

@@ -25,6 +25,7 @@ public class maxHostAction extends AbstractAction {
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		
+		String name = JOptionPane.showInputDialog(window,
+                        "Specify the maximum reachable hosts : ", null);
 	}
 }

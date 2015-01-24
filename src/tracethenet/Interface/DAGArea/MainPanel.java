@@ -51,7 +51,7 @@ public class MainPanel extends JPanel{
     
     public void createGraph(ArrayList<String> liste){
         clear();
-        add(graph.constructGraph(liste));
+        add(graph.constructGraph(liste,0));
         repaint();
     }
     
