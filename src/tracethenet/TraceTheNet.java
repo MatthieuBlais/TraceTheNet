@@ -31,6 +31,15 @@ public class TraceTheNet {
             t.start();
              
         TraceRoute trace = new TraceRoute("google.fr", true);
+        
+        /* How to use Traceroute
+        trace.getParseResult().getResultSize() : return number of line
+        trace.getParseResult().allFailed(step) : Il all route of the line step failed
+        trace.getParseResult().hasFailed(step, number) : If a route of the step line has failed
+        trace.getParseResult().getIP(step); : Give IP of the line step
+        trace.getParseResult().gethostname(step); : Give hostname of the line step
+        trace.getParseResult().getTime(step, number) : Get time of the step line and the try number 
+        */
          
         for (int i=0; i<10000; i++)
                  System.out.println(i);
