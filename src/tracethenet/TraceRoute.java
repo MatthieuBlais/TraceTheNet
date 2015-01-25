@@ -20,6 +20,8 @@ public class TraceRoute {
     private final SSH sshObject;
     private boolean ping;
     private ParseTraceroute parseResult;
+    private int timeOut;
+    private int maxHost;
     
     /**
      * Constructor
@@ -32,6 +34,8 @@ public class TraceRoute {
         ssh = sshh;
         ping = false;
         sshObject = new SSH("195.154.68.197", "thibault", "sarazasaraza");
+        maxHost = 1000;
+        timeOut = 1000;
     }
     
     /**
@@ -40,8 +44,8 @@ public class TraceRoute {
      */
     public String getTracerouteCmd()
     {
-        if("windows".equals(OS.getOperatingSystemType())) return "tracert";
-        else return "traceroute";
+        if("windows".equals(OS.getOperatingSystemType())) return "tracert -h " + maxHost + " -w " + timeOut*1000;
+        else return "traceroute -m " + maxHost + " -w " + timeOut;
     }
     
     /**
@@ -167,5 +171,23 @@ public class TraceRoute {
     public ParseTraceroute getParseResult()
     {
         return parseResult;
+    }
+    
+    /**
+     * Set timeOut
+     * @param time the timeout 
+     */
+    public void setTimeOut(int time)
+    {
+        timeOut = time;
+    }
+    
+    /**
+     * Set Max host
+     * @param max the number of host max
+     */
+    public void setMaxHost(int max)
+    {
+        maxHost = max;
     }
 }
