@@ -22,6 +22,7 @@ public class TraceRoute {
     private ParseTraceroute parseResult;
     private int timeOut;
     private int maxHost;
+    private final String os;
     
     /**
      * Constructor
@@ -34,8 +35,11 @@ public class TraceRoute {
         ssh = sshh;
         ping = false;
         sshObject = new SSH("195.154.68.197", "thibault", "sarazasaraza");
-        maxHost = 1000;
-        timeOut = 1000;
+        maxHost = 255;
+        timeOut = 5;//In seconds
+        if("windows".equals(OS.getOperatingSystemType()))
+            os = "windows";
+        else os = "linux";
     }
     
     /**
@@ -44,8 +48,8 @@ public class TraceRoute {
      */
     public String getTracerouteCmd()
     {
-        if("windows".equals(OS.getOperatingSystemType())) return "tracert -h " + maxHost + " -w " + timeOut*1000;
-        else return "traceroute -m " + maxHost + " -w " + timeOut;
+        if(!"windows".equals(OS.getOperatingSystemType()) || ssh) return "traceroute " + address + " -m " + maxHost + " -w " + timeOut;
+        else return "tracert "  + "-h " + maxHost + " -w " + timeOut*1000 + " " + address;
     }
     
     /**
@@ -56,9 +60,9 @@ public class TraceRoute {
     {
         if(!ping)
         {
-            if(!sshObject.checkServer()) return false;
+            if(!sshObject.checkServer(timeOut, os)) return false;
         }
-        resultArray = sshObject.executeCmd("traceroute " + address);
+        resultArray = sshObject.executeCmd(getTracerouteCmd());
         sshObject.closeSSH();
         return true;
     }
@@ -70,9 +74,12 @@ public class TraceRoute {
     public boolean checkPing()
     {
         if(ssh)
-            ping = sshObject.checkServer();
+            ping = sshObject.checkServer(timeOut, os);
         else
-            ping = ConnectionCheck.checkPing(address);
+        {
+            ping = ConnectionCheck.checkPing(address, timeOut, os);
+        }
+            
         return ping;
     }
     
@@ -94,7 +101,7 @@ public class TraceRoute {
         
         if(!ping)
         {
-            if(!ConnectionCheck.checkPing(address))
+            if(!ConnectionCheck.checkPing(address, timeOut, os))
             {
                 System.out.println("No ping, Do you have Internet ?");
                 return false;
@@ -104,7 +111,7 @@ public class TraceRoute {
         Runtime rt = Runtime.getRuntime();
         try
         {
-            Process pr = rt.exec(getTracerouteCmd() + " " + address);
+            Process pr = rt.exec(getTracerouteCmd());
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
             String line;
@@ -188,6 +195,8 @@ public class TraceRoute {
      */
     public void setMaxHost(int max)
     {
+        if(max>255 || max <0)
+            max = 255;
         maxHost = max;
     }
 }

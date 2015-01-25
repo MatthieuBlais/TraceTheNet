@@ -18,22 +18,26 @@ public class ConnectionCheck {
      * Check ping of the address
      * Useful to check if the address is correct
      * @param address Adddress to check the ping
+     * @param timeOut Timeout
+     * @param os OS of the system
      * @return true if ping ok, false elseif
      */
-    public static boolean checkPing(String address)
+    public static boolean checkPing(String address, int timeOut, String os)
     {
         if(address.isEmpty()) return false;
         
+        String cmd;
+        
+        if(os.equals("linux")) cmd = "ping " + address + " -W " + timeOut +  " -c 5";
+        else cmd =  "ping " + address + " -w " + timeOut*1000;
+        
         Runtime rt = Runtime.getRuntime();
-        String ping;
+
         try
         {
-            if(!OS.getOperatingSystemType().equals("windows"))
-                ping = "ping " + address;
-            else
-                ping = "ping -c 5 " + address;
+
             
-            Process pr = rt.exec("ping "+address);
+            Process pr = rt.exec(cmd);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
             StringBuffer output = new StringBuffer();

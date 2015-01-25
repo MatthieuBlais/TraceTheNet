@@ -56,11 +56,12 @@ public class SSH {
     
     /**
      * Check if the server is okay
+     * @param timeOut Timeout of ping commands
      * @return true if okay, false elseif
      */
-    public boolean checkServer()
+    public boolean checkServer(int timeOut, String os)
     {
-        if(ConnectionCheck.checkPing(hostname))
+        if(ConnectionCheck.checkPing(hostname, timeOut, os))
             return true;
         else
             System.out.println("Error : the remote server in SSH doesn't answer :(");
