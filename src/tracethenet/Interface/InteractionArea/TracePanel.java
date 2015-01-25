@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 import tracethenet.Interface.DAGArea.GraphDAG;
 import tracethenet.Interface.DAGArea.MainPanel;
+import tracethenet.Interface.Frame;
 
 /**
  *
@@ -21,13 +22,15 @@ public class TracePanel extends JPanel{
      private FlowLayout Layout;
      private JButton btn;
      private JButton clean;
+     private HostnamePanel host;
      
-     public TracePanel(MainPanel graph, JScrollPane scroll){
+     public TracePanel(MainPanel graph, JScrollPane scroll, HostnamePanel host, Frame window){
         Layout = new FlowLayout();
+        this.host = host;
         setLayout(Layout);
         setBackground(new Color(0,0,0,30));
         
-        btn = new JButton(new TraceAction("Trace the route"));
+        btn = new JButton(new TraceAction(window, "Trace the route", this.host));
         add(btn);
         clean = new JButton(new CleanAction("Clean", graph,scroll));
         add(clean);

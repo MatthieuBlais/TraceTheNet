@@ -43,5 +43,9 @@ public class HostnamePanel extends JPanel{
         
     }
     
+    public JTextField getTextField(){
+        return textip;
+    }
+    
     
 }

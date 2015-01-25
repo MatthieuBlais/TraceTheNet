@@ -18,17 +18,18 @@ import tracethenet.Interface.DAGArea.MainPanel;
 public class InteractionPanel extends JPanel{
     
     private GridLayout layout;
- 
+    private HostnamePanel host;
     
     
-    public InteractionPanel(MainPanel graph, JScrollPane scroll){
+    public InteractionPanel(MainPanel graph, JScrollPane scroll, Frame window){
         
         layout = new GridLayout(0,1);
         setLayout(layout);
         setBackground(new Color(0,0,0,0));
+        host = new HostnamePanel();
         
-        add(new HostnamePanel());
-        add(new TracePanel(graph, scroll));
+        add(host);
+        add(new TracePanel(graph, scroll, host, window));
 
         
     }

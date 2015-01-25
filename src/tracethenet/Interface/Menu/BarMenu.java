@@ -40,15 +40,15 @@ public class BarMenu extends JMenuBar {
         menu2.add(timeout);
         JMenuItem maxHost = new JMenuItem(new maxHostAction(window, "Max Hosts"));
         menu2.add(maxHost);
-        menu2.addSeparator();
-        ButtonGroup group = new ButtonGroup();
+      //  menu2.addSeparator();
+        /*ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem rbMenuItem = new JRadioButtonMenuItem("Windows");
         rbMenuItem.setSelected(true);
         group.add(rbMenuItem);
         menu2.add(rbMenuItem);
         rbMenuItem = new JRadioButtonMenuItem("Linux");
         group.add(rbMenuItem);
-        menu2.add(rbMenuItem);
+        menu2.add(rbMenuItem);*/
         
         
         menu2.addSeparator();
