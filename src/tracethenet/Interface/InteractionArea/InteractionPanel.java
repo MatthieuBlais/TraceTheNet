@@ -6,10 +6,13 @@
 
 package tracethenet.Interface.InteractionArea;
 
-import java.awt.*;
+
+import java.awt.Color;
+import java.awt.GridLayout;
 import javax.swing.*;
 import tracethenet.Interface.DAGArea.GraphDAG;
 import tracethenet.Interface.DAGArea.MainPanel;
+import tracethenet.Interface.Frame;
 
 /**
  *
@@ -19,7 +22,7 @@ public class InteractionPanel extends JPanel{
     
     private GridLayout layout;
     private HostnamePanel host;
-    
+    private TracePanel trace;
     
     public InteractionPanel(MainPanel graph, JScrollPane scroll, Frame window){
         
@@ -29,10 +32,14 @@ public class InteractionPanel extends JPanel{
         host = new HostnamePanel();
         
         add(host);
-        add(new TracePanel(graph, scroll, host, window));
+        trace = new TracePanel(graph, scroll, host, window);
+        add(trace);
 
         
     }
     
+    public TracePanel getBtn(){
+        return trace;
+    }
     
 }

@@ -6,6 +6,7 @@
 
 package tracethenet.Interface.DAGArea;
 
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 
 /**
@@ -28,11 +29,19 @@ public class ScrollArea{
         return scroll;
     }
     
+    
+    
     public void clear(){
         
     }
     
     public MainPanel getGraph(){
         return panel;
+    }
+    
+    public void createGraph(ArrayList<String>l){
+        panel.createGraph(l);
+        scroll.validate();
+        scroll.repaint();
     }
 }

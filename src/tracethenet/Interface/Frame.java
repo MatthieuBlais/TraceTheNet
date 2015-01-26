@@ -30,8 +30,11 @@ public class Frame extends JFrame {
         setTitle(TITLE);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        panel = new Pannel();
-        setJMenuBar(new BarMenu(this, panel.getMainPanel(), panel.getScroll()));
+        panel = new Pannel(this);
+        BarMenu b = new BarMenu(this, panel.getMainPanel(), panel.getScroll());
+        setJMenuBar(b);
+        
+        
 
         //Main Layout
         add(panel);
@@ -39,5 +42,7 @@ public class Frame extends JFrame {
         setVisible(true);
     }
     
-    
+    public Pannel getPannel(){
+        return panel;
+    }
 }

@@ -53,6 +53,7 @@ public class BarMenu extends JMenuBar {
         
         menu2.addSeparator();
         JCheckBoxMenuItem ssh = new JCheckBoxMenuItem(new SSH(window, "SSH"));
+        
         menu2.add(ssh);
         add(menu2);
         

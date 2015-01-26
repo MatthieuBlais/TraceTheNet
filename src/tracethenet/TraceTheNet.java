@@ -27,10 +27,10 @@ public class TraceTheNet {
             // TODO code application logic here
             //CheckPing : check if the website exits and if we have internet
             Frame window = new Frame();
-            ProgressThread t = new ProgressThread(window);
-            t.start();
+           /* ProgressThread t = new ProgressThread(window);
+            t.start();*/
              
-        TraceRoute trace = new TraceRoute("google.fr", true);
+      //  TraceRoute trace = new TraceRoute("google.fr", true);
         
         /* How to use Traceroute
         trace.getParseResult().getResultSize() : return number of line
@@ -41,18 +41,21 @@ public class TraceTheNet {
         trace.getParseResult().getTime(step, number) : Get time of the step line and the try number 
         */
          
-        for (int i=0; i<10000; i++)
-                 System.out.println(i);
-        
+        /*
         if(trace.checkPing())
         {
             trace.execute();
-            trace.printResult();
             trace.parse();
+           /* for(int i=0; i<trace.getParseResult().getResultSize(); i++){
+                System.out.println(trace.getParseResult().getIP(i) );
+            }
+            trace.printResult();
+            trace.printIP();
+            
             int nbResult = trace.getParseResult().getResultSize();
         }
-        t.stopp();
-          
+       t.stopp();
+        */  
         } catch (IOException ex) {
             Logger.getLogger(TraceTheNet.class.getName()).log(Level.SEVERE, null, ex);
         }

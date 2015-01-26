@@ -171,6 +171,17 @@ public class TraceRoute {
         }
     }
     
+    public void printIP(){
+        ArrayList<String> l = parseResult.getList();
+        for (int i=0; i<l.size(); i++){
+            System.out.println(l.get(i));
+        }
+    }
+    
+    public ArrayList<String> getListIP(){
+        return parseResult.getList();
+    }
+    
     /**
      * Get parse result
      * @return The ParseTraceroute object

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ParseTraceroute {
     protected ArrayList<ArrayList<Route>> resultRoute;
     protected final ArrayList<String> input;
+    protected ArrayList<String> list;
     
     /**
      * Constructor 
@@ -23,6 +24,7 @@ public class ParseTraceroute {
     {
         input = resultArray;
         resultRoute = new ArrayList<>();
+        list = new ArrayList<>();
     }
     
     /**
@@ -112,5 +114,9 @@ public class ParseTraceroute {
     {
         
         return true;
+    }
+    
+    public ArrayList<String> getList(){
+        return list;
     }
 }

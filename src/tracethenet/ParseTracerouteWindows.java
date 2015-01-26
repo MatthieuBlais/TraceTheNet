@@ -111,10 +111,19 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                         if(tmpIP2.isEmpty())
                         {
                             ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP1);
+                            list.add(tmpIP1);
                         }
                         else 
                         {
                             ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP2);
+                            int a =0;
+                            for (String list1 : list) {
+                                if (list1.equals(tmpIP2)) {
+                                    a=1;
+                                }
+                            }
+                            if (a==0)
+                            list.add(tmpIP2);
                             ((RouteSuccessNewIP)tmpRoute.get(IP)).setHostname(tmpIP1);
                         }
                     }
@@ -125,6 +134,7 @@ public class ParseTracerouteWindows extends ParseTraceroute {
             }
             line++;
             resultRoute.add(tmpRoute);
+            
         }
         
         return true;

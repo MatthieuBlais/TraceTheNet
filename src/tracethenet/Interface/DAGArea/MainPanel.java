@@ -24,7 +24,7 @@ public class MainPanel extends JPanel{
         graph = new GraphDAG();
         layout = new FlowLayout();
         setLayout(layout);
-        setBackground(Color.WHITE);
+        setBackground(Color.WHITE);/*
         str = new ArrayList<String>();
         str.add("125");
         str.add("456");
@@ -42,7 +42,7 @@ public class MainPanel extends JPanel{
 
         
        
-        createGraph(str);
+        createGraph(str);*/
     }
     
     public void clear(){
@@ -52,6 +52,7 @@ public class MainPanel extends JPanel{
     public void createGraph(ArrayList<String> liste){
         clear();
         add(graph.constructGraph(liste,0));
+        validate();
         repaint();
     }
     

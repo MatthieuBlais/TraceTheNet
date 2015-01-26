@@ -118,7 +118,14 @@ public class ParseTracerouteLinux extends ParseTraceroute{
                     tmpIP2=tmpIP2.replace("(", "");
                     tmpIP2=tmpIP2.replace(")", "");
                     ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP2);
-
+                    int a =0;
+                            for (String list1 : list) {
+                                if (list1.equals(tmpIP2)) {
+                                    a=1;
+                                }
+                            }
+                            if (a==0)
+                            list.add(tmpIP2);
                     if(!tmpIP1.equals(tmpIP2))
                         ((RouteSuccessNewIP)tmpRoute.get(IP)).setHostname(tmpIP1);
                 }

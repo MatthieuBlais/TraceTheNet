@@ -19,6 +19,7 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -60,8 +61,9 @@ public class GraphDAG {
             
         VisualizationViewer<Node, Link> vv = new VisualizationViewer<Node, Link>(layout);
         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+        vv.setAutoscrolls(true);
        // vv.setBorder(new EmptyBorder(100, 100, 100, 100));
-        
+        vv.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
         vv.setBackground(Color.WHITE);
         
         panel.removeAll();

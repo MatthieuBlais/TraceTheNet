@@ -24,11 +24,11 @@ public class Pannel extends JPanel{
     private InteractionPanel inter;
     private ScrollArea scroll;
     
-    public Pannel(){
+    public Pannel(Frame window){
        super();
         
        scroll = new ScrollArea();
-       inter = new InteractionPanel(scroll.getGraph(),scroll.getScroll());
+       inter = new InteractionPanel(scroll.getGraph(),scroll.getScroll(), window);
        
        setSize(1024,720);
        setLayout(new BorderLayout());
@@ -90,5 +90,13 @@ public class Pannel extends JPanel{
     
     public MainPanel getMainPanel(){
         return scroll.getGraph();
+    }
+    
+    public Pannel getPannel(){
+        return this;
+    }
+    
+    public TracePanel getBtn(){
+        return inter.getBtn();
     }
 }
