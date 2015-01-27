@@ -77,7 +77,7 @@ public class TraceRoute {
             ping = sshObject.checkServer(timeOut, os);
         else
         {
-            ping = ConnectionCheck.checkPing(address, timeOut, os);
+            ping = ConnectionCheck.checkPing("google.fr", timeOut, os);
         }
             
         return ping;
@@ -101,9 +101,9 @@ public class TraceRoute {
         
         if(!ping)
         {
-            if(!ConnectionCheck.checkPing(address, timeOut, os))
+            if(!ConnectionCheck.checkPing("google.fr", timeOut, os))
             {
-                System.out.println("No ping, Do you have Internet ?");
+                System.out.println("No ping, Do you have Internet ? Or maybe Google is down...");
                 return false;
             }
         }
