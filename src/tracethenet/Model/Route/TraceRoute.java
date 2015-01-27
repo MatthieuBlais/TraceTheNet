@@ -3,7 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tracethenet;
+package tracethenet.Model.Route;
+import tracethenet.Model.OS.OS;
+import tracethenet.Controller.SSH.SSH;
+import tracethenet.Controller.ConnectionCheck.ConnectionCheck;
+import tracethenet.Model.Parse.ParseTracerouteWindows;
+import tracethenet.Model.Parse.ParseTracerouteLinux;
+import tracethenet.Model.Parse.ParseTraceroute;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

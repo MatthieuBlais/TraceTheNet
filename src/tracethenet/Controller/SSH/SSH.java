@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tracethenet;
+package tracethenet.Controller.SSH;
 
+import tracethenet.Controller.ConnectionCheck.ConnectionCheck;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;

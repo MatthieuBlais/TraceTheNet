@@ -5,6 +5,7 @@
  */
 package tracethenet;
 
+import tracethenet.Model.Route.TraceRoute;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

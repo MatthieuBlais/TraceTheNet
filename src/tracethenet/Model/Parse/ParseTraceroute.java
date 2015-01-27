@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tracethenet;
+package tracethenet.Model.Parse;
 
 import java.util.ArrayList;
+import tracethenet.Model.Route.Route;
+import tracethenet.Model.Route.RouteFail;
+import tracethenet.Model.Route.RouteSuccessNewIP;
+import tracethenet.Model.Route.RouteSuccessOldIP;
 
 /**
  * Parse Traceroute class

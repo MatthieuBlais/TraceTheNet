@@ -3,25 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tracethenet;
+package tracethenet.Model.Parse;
 
 import java.util.ArrayList;
+import tracethenet.Model.Route.Route;
+import tracethenet.Model.Route.RouteFail;
+import tracethenet.Model.Route.RouteSuccessNewIP;
+import tracethenet.Model.Route.RouteSuccessOldIP;
 
 /**
- * Parse a traceroute for windows class
+ * Parse a traceroute command for linux
  * @author Thibault
  */
-public class ParseTracerouteWindows extends ParseTraceroute {
-    
+public class ParseTracerouteLinux extends ParseTraceroute{
+        
     /**
-     * Constructor who called the super constructtor
-     * @param resultArray The arrray of string of result of traceroute command
+     * Constructor wh called the uepr constructor
+     * @param resultArray The array of string of traceroute result
      */
-    public ParseTracerouteWindows(ArrayList<String> resultArray) 
+    public ParseTracerouteLinux(ArrayList<String> resultArray) 
     {
         super(resultArray);
     }
-
+    
     /**
      * PArse traceroute result for winddows
      * @return true if okay, false if error occured
@@ -33,14 +37,14 @@ public class ParseTracerouteWindows extends ParseTraceroute {
         
         int line = 0;
         
-        for (int j = 4; j<input.size(); j++) 
+        for (int j = 1; j<input.size(); j++) 
         {
             int i =0;
             int step = 0;
             ArrayList<Route> tmpRoute = new ArrayList<>();
             boolean exit = false;
             String tmpIP1 = new String(), tmpIP2 = new String();
-            while(i != input.get(j).length() && !exit)
+            while(i != input.get(j).length() && !exit )
             {
                 StringBuffer tmp = new StringBuffer();
                 while(i != input.get(j).length() && input.get(j).charAt(i) == ' ')
@@ -56,19 +60,25 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                     switch(step)
                     {
                         case 0:
-                            if(!Character.isDigit(tmp.charAt(0)))
-                            {
-                                step=6;
-                                exit=true;
-                            }
                             break;
-                        case 1:
+                       case 1:
+                           if(tmp.toString().equals("*"))
+                           {
+                               step = 6;//No response
+                           }
+                           else
+                            tmpIP1 = tmp.toString();
+                           break;
+                       case 2:
+                            tmpIP2 = tmp.toString();
+                            break;
+                        case 3:
                             if(tmp.charAt(0) == '*')
                                 tmpRoute.add(new RouteFail());
                             else
                                 tmpRoute.add(new RouteSuccessNewIP(tmp.toString()));
                             break;
-                       case 2:
+                       case 4:
                             if(tmp.charAt(0) == '*')
                                 tmpRoute.add(new RouteFail());
                             else
@@ -79,7 +89,7 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                             }
                                 
                            break;
-                       case 3:
+                       case 5:
                             if(tmp.charAt(0) == '*')
                                 tmpRoute.add(new RouteFail());
                             else
@@ -88,43 +98,31 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                                     tmpRoute.add(new RouteSuccessOldIP(tmp.toString()));
                                 else tmpRoute.add(new RouteSuccessNewIP(tmp.toString()));;
                            break;
-                       case 4:
-                            tmpIP1 = tmp.toString();
+                       case 6:
+                           tmpRoute.add(new RouteFail());
+                           tmpRoute.add(new RouteFail());
+                           tmpRoute.add(new RouteFail());
+                           exit = true;
                            break;
-                       case 5:
-                            tmpIP2 = tmp.toString();
-                            exit = true;
-                            break;
                                 
                     }
                 
                 
                 //If fail for all step we can exit the loop
-                if(step == 4 && tmpRoute.get(0) instanceof RouteFail
-                        && tmpRoute.get(1) instanceof RouteFail
-                        && tmpRoute.get(2) instanceof RouteFail)
-                    exit = true;
-                else
+
+                int IP;
+                if(step==5)
                 {
-                    int IP;
-                    if(!tmpIP1.isEmpty() && step!=6)
-                    {
-                        if(tmpRoute.get(0) instanceof RouteSuccessNewIP)
-                            IP = 0;
-                        else if(tmpRoute.get(1) instanceof RouteSuccessNewIP)
-                            IP = 1;
-                        else IP = 2;
-                        if(tmpIP2.isEmpty())
-                        {
-                            ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP1);
-                            list.add(tmpIP1);
-                        }
-                        else 
-                        {
-                            tmpIP2=tmpIP2.replace("[", "");
-                            tmpIP2=tmpIP2.replace("]", "");
-                            ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP2);
-                            int a =0;
+                    if(tmpRoute.get(0) instanceof RouteSuccessNewIP)
+                        IP = 0;
+                    else if(tmpRoute.get(1) instanceof RouteSuccessNewIP)
+                        IP = 1;
+                    else IP = 2;
+ 
+                    tmpIP2=tmpIP2.replace("(", "");
+                    tmpIP2=tmpIP2.replace(")", "");
+                    ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP2);
+                    int a =0;
                             for (String list1 : list) {
                                 if (list1.equals(tmpIP2)) {
                                     a=1;
@@ -132,17 +130,16 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                             }
                             if (a==0)
                             list.add(tmpIP2);
-                            ((RouteSuccessNewIP)tmpRoute.get(IP)).setHostname(tmpIP1);
-                        }
-                    }
+                    if(!tmpIP1.equals(tmpIP2))
+                        ((RouteSuccessNewIP)tmpRoute.get(IP)).setHostname(tmpIP1);
                 }
+                
 
-                if(!tmp.toString().equals("ms") && step!=5)
+                if(!tmp.toString().equals("ms") && step!=6)
                     step++;
             }
             line++;
-            if(tmpRoute.size()==3)resultRoute.add(tmpRoute);
-            
+            resultRoute.add(tmpRoute);
         }
         
         return true;

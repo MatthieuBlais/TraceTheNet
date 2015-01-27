@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import tracethenet.Interface.Frame;
 import tracethenet.Interface.ProgressThread;
-import tracethenet.TraceRoute;
+import tracethenet.Model.Route.TraceRoute;
 
 /**
  *
