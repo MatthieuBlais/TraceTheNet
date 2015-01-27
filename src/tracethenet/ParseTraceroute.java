@@ -34,13 +34,17 @@ public class ParseTraceroute {
      */
     public String getIP(int step)
     {
-        if(resultRoute.get(step).get(0) instanceof RouteSuccessNewIP)
-            return ((RouteSuccessNewIP)resultRoute.get(step).get(0)).getIP();
-        else if(resultRoute.get(step).get(1) instanceof RouteSuccessNewIP)
-            return ((RouteSuccessNewIP)resultRoute.get(step).get(1)).getIP();
-        else if(resultRoute.get(step).get(2) instanceof RouteSuccessNewIP)
-            return ((RouteSuccessNewIP)resultRoute.get(step).get(2)).getIP();
-        else return "";
+        if(resultRoute.size()>step && resultRoute.get(step).size()==3)
+        {
+            if(resultRoute.get(step).get(0) instanceof RouteSuccessNewIP)
+                return ((RouteSuccessNewIP)resultRoute.get(step).get(0)).getIP();
+            else if(resultRoute.get(step).get(1) instanceof RouteSuccessNewIP)
+                return ((RouteSuccessNewIP)resultRoute.get(step).get(1)).getIP();
+            else if(resultRoute.get(step).get(2) instanceof RouteSuccessNewIP)
+                return ((RouteSuccessNewIP)resultRoute.get(step).get(2)).getIP();
+            else return "";
+        }
+        return null;
     }
 
     /**

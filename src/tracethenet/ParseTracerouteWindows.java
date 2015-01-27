@@ -56,6 +56,11 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                     switch(step)
                     {
                         case 0:
+                            if(!Character.isDigit(tmp.charAt(0)))
+                            {
+                                step=6;
+                                exit=true;
+                            }
                             break;
                         case 1:
                             if(tmp.charAt(0) == '*')
@@ -88,6 +93,7 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                            break;
                        case 5:
                             tmpIP2 = tmp.toString();
+                            exit = true;
                             break;
                                 
                     }
@@ -101,7 +107,7 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                 else
                 {
                     int IP;
-                    if(!tmpIP1.isEmpty())
+                    if(!tmpIP1.isEmpty() && step!=6)
                     {
                         if(tmpRoute.get(0) instanceof RouteSuccessNewIP)
                             IP = 0;
@@ -115,6 +121,8 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                         }
                         else 
                         {
+                            tmpIP2=tmpIP2.replace("[", "");
+                            tmpIP2=tmpIP2.replace("]", "");
                             ((RouteSuccessNewIP)tmpRoute.get(IP)).setIP(tmpIP2);
                             int a =0;
                             for (String list1 : list) {
@@ -129,11 +137,11 @@ public class ParseTracerouteWindows extends ParseTraceroute {
                     }
                 }
 
-                if(!tmp.toString().equals("ms"))
+                if(!tmp.toString().equals("ms") && step!=5)
                     step++;
             }
             line++;
-            resultRoute.add(tmpRoute);
+            if(tmpRoute.size()==3)resultRoute.add(tmpRoute);
             
         }
         
