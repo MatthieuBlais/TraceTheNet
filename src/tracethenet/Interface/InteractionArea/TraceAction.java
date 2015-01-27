@@ -7,6 +7,9 @@
 package tracethenet.Interface.InteractionArea;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -23,7 +26,8 @@ public class TraceAction extends AbstractAction {
         private HostnamePanel host;
         private Frame window;
         private TracePanel tt;
-        
+        private String s;
+        private ArrayList<String> l;
     
 	public TraceAction(Frame window, String texte, HostnamePanel host, TracePanel t){
 		super(texte);
@@ -36,8 +40,8 @@ public class TraceAction extends AbstractAction {
         @Override
 	public void actionPerformed(ActionEvent e) {
             JTextField text = host.getTextField();
-            
-            String s = text.getText();
+            l = new ArrayList<>();
+            s = text.getText();
             
             if(s.equals("") || s == null){
                 JOptionPane.showMessageDialog(window,"Error in IP adress. Please try again.",
@@ -45,10 +49,14 @@ public class TraceAction extends AbstractAction {
                 JOptionPane.ERROR_MESSAGE);
             }
             else{
-        //         ProgressThread t = new ProgressThread(window);
-       //    t.start();
-             
-        TraceRoute trace = new TraceRoute(s,tt.getSSH());
+               
+                 ProgressThread tache = new ProgressThread(window);
+                tache.setAff(true);
+            tache.execute();
+     
+          
+               System.out.println("sss");
+              TraceRoute trace = new TraceRoute(s,tt.getSSH());
         trace.setMaxHost(tt.getMax());
         trace.setTimeOut(tt.getTimeout());
 
@@ -58,17 +66,34 @@ public class TraceAction extends AbstractAction {
             trace.parse();
             trace.printResult();
             trace.printIP();
-            
+            l = trace.getListIP();
             int nbResult = trace.getParseResult().getResultSize();
         }
         
-        
-         window.getPannel().getMainPanel().createGraph(trace.getListIP());
+          
+         //       try {
+                    //         ProgressThread t = new ProgressThread(window);
+                    //    t.start();
+                    //  while(t.isAlive())
+                    //    tache.setVisible(true);
+                     System.out.println("aaa");
+                   
+                    
+         window.getPannel().getMainPanel().createGraph(l);
         window.getPannel().getScroll().validate();
         window.getPannel().getScroll().repaint();
+        
+        tache.setAff(false);
+       
+         
+                     System.out.println("bbb");
+                //} catch (InterruptedException ex) {
+                //    Logger.getLogger(TraceAction.class.getName()).log(Level.SEVERE, null, ex);
+               // }
                 
         
-        //t.stopp();
+            
+        
             }
 		
 	}

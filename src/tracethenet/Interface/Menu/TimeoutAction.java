@@ -29,23 +29,26 @@ public class TimeoutAction extends AbstractAction {
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-            String name ="";
-            name = JOptionPane.showInputDialog(window,
+          
+            String name = JOptionPane.showInputDialog(window,
                         "Specify the timeout (0-60): ", null);
                  System.out.println(name);
-                
+            if (name!=null){  
                 if(name.isEmpty())
                     timeout = 10;
                 else
                     timeout = Integer.parseInt(name);
                 
-                if(timeout<0)
-                    t.setTimeout(0);
+                if(timeout<1)
+                    t.setTimeout(1);
                 else if(timeout>60)
                     t.setTimeout(60);
                 else
                     t.setTimeout(timeout);
                 
                 System.out.println(t.getTimeout());
+            }
+            else
+                t.setTimeout(1);
 	}
 }

@@ -29,23 +29,28 @@ public class maxHostAction extends AbstractAction {
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		String name ="";
-            name = JOptionPane.showInputDialog(window,
+		
+            String name = JOptionPane.showInputDialog(window,
                         "Specify the maximum reachable hosts (0-255): ", null);
                  System.out.println(name);
-                if(name.isEmpty())
-                    max = 255;
+               
+                 if(name!=null){
+                 if(name.isEmpty())
+                    max = 20;
                 else
                     max = Integer.parseInt(name);
                 System.out.println(max);
                 if(max<0)
                     t.setMax(0);
                 else if(max>255)
-                    t.setMax(255);
+                    t.setMax(20);
                 else
                      t.setMax(max);
                 
                 System.out.println(t.getMax());
+                 }
+                 else
+                     t.setMax(20);
 	}
         
         

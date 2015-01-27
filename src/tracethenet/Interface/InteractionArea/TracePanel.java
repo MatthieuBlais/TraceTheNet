@@ -8,6 +8,7 @@ package tracethenet.Interface.InteractionArea;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import tracethenet.Interface.DAGArea.GraphDAG;
 import tracethenet.Interface.DAGArea.MainPanel;
@@ -37,6 +38,7 @@ public class TracePanel extends JPanel{
         setBackground(new Color(0,0,0,30));
         
         btn = new JButton(new TraceAction(window, "Trace the route", this.host, this));
+        btn.setMnemonic(KeyEvent.VK_ENTER);
         add(btn);
         clean = new JButton(new CleanAction("Clean", graph,scroll));
         add(clean);
