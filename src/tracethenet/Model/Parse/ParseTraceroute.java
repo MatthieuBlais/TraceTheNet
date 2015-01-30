@@ -6,6 +6,7 @@
 package tracethenet.Model.Parse;
 
 import java.util.ArrayList;
+import java.util.List;
 import tracethenet.Model.Route.Route;
 import tracethenet.Model.Route.RouteFail;
 import tracethenet.Model.Route.RouteSuccessNewIP;
@@ -49,6 +50,24 @@ public class ParseTraceroute {
             else return "";
         }
         return null;
+    }
+    
+    public ArrayList<String> getAllIp(){
+        ArrayList<String> l = new ArrayList();
+        
+        for (int step=0; step<resultRoute.size(); step++ ){
+        if(resultRoute.size()>step && resultRoute.get(step).size()==3)
+        {
+            if(resultRoute.get(step).get(0) instanceof RouteSuccessNewIP)
+                l.add(((RouteSuccessNewIP)resultRoute.get(step).get(0)).getIP());
+            else if(resultRoute.get(step).get(1) instanceof RouteSuccessNewIP)
+                l.add(((RouteSuccessNewIP)resultRoute.get(step).get(1)).getIP());
+            else if(resultRoute.get(step).get(2) instanceof RouteSuccessNewIP)
+                l.add(((RouteSuccessNewIP)resultRoute.get(step).get(2)).getIP());
+            
+        }
+        }
+        return l;
     }
 
     /**

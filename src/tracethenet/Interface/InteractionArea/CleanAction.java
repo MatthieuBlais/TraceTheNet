@@ -33,7 +33,7 @@ public class CleanAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) { 
 		graph.getGraph().clearGraph();
                 graph.removeAll();
-                graph.add(graph.getGraph().constructGraph(new ArrayList<String>(),1));
+                graph.add(graph.getGraph().constructGraph(new ArrayList<String>(),1,0));
                 scroll.repaint();
                 scroll.validate();
 	}

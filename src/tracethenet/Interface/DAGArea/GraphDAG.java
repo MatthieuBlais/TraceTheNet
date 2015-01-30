@@ -51,10 +51,10 @@ public class GraphDAG {
         panel.setBorder(new EmptyBorder(50, 50, 50, 50) );
     }
 
-    public JPanel constructGraph(ArrayList<String> list, int a) {
+    public JPanel constructGraph(ArrayList<String> list, int a, int b) {
         addBranch(list);
         Layout<Node, Link> layout;
-        if (a==0)
+        if (a==0 || b>2)
            layout  = new ISOMLayout<>(g);
         else
             layout = new CircleLayout<>(g);

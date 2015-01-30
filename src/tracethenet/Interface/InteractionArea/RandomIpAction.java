@@ -8,7 +8,9 @@ package tracethenet.Interface.InteractionArea;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.JTextField;
 import tracethenet.Interface.Frame;
+import tracethenet.Model.GenerateIP.GenerateIP;
 
 /**
  *
@@ -16,13 +18,17 @@ import tracethenet.Interface.Frame;
  */
 public class RandomIpAction extends AbstractAction {
 	
- 
-	public RandomIpAction(String texte){
+        private JTextField j;
+    
+	public RandomIpAction(String texte, JTextField jj){
 		super(texte);
+                j = jj;
 	}
  
         @Override
 	public void actionPerformed(ActionEvent e) { 
-		
+		GenerateIP g = new GenerateIP();
+                j.setText(g.generate());
+                
 	}
 }

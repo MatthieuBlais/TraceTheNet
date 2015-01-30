@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Thibault
  */
-public class generateIP {
+public class GenerateIP {
     public static String generate()
     {
         Random r = new Random();

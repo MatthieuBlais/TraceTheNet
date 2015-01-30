@@ -37,7 +37,7 @@ public class HostnamePanel extends JPanel{
         
         add(textip);
         
-        btn = new JButton(new RandomIpAction("Random"));
+        btn = new JButton(new RandomIpAction("Random", textip));
         
         add(btn);
         

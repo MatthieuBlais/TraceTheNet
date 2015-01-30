@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import tracethenet.Interface.Frame;
 import tracethenet.Interface.ProgressThread;
@@ -50,46 +51,63 @@ public class TraceAction extends AbstractAction {
             }
             else{
                
-                 ProgressThread tache = new ProgressThread(window);
+              /*   ProgressThread tache = new ProgressThread(window);
                 tache.setAff(true);
-            tache.execute();
-     
-          
-               System.out.println("sss");
-              TraceRoute trace = new TraceRoute(s,tt.getSSH());
-        trace.setMaxHost(tt.getMax());
-        trace.setTimeOut(tt.getTimeout());
-
-        if(trace.checkPing())
-        {
-            trace.execute();
-            trace.parse();
-            trace.printResult();
-            trace.printIP();
-            l = trace.getListIP();
-            int nbResult = trace.getParseResult().getResultSize();
-        }
-        
-          
-         //       try {
+            tache.execute();*/
+            //    JProgressBar bar = new JProgressBar ();
+ProgressThread worker = new ProgressThread (window, s, tt);
+        worker.execute();
+                try {
+                    
+                 //   worker.setAff2(false);
+                    Thread.sleep(25);
+//window.add(bar);
+                    /*
+                    
+                    System.out.println("sss");
+                    TraceRoute trace = new TraceRoute(s,tt.getSSH());
+                    trace.setMaxHost(tt.getMax());
+                    trace.setTimeOut(tt.getTimeout());
+                    
+                    if(trace.checkPing())
+                    {
+                    trace.execute();
+                    trace.parse();
+                    trace.printResult();
+                    trace.printIP();
+                    l = trace.getParseResult().getAllIp();
+                    int nbResult = trace.getParseResult().getResultSize();
+                    
+                    }
+                    else{
+                    l.add(s);
+                    }
+                    
+                    
+                    
+                    
+                    //       try {
                     //         ProgressThread t = new ProgressThread(window);
                     //    t.start();
                     //  while(t.isAlive())
                     //    tache.setVisible(true);
-                     System.out.println("aaa");
-                   
+                    System.out.println("aaa");
                     
-         window.getPannel().getMainPanel().createGraph(l);
-        window.getPannel().getScroll().validate();
-        window.getPannel().getScroll().repaint();
-        
-        tache.setAff(false);
-       
-         
-                     System.out.println("bbb");
-                //} catch (InterruptedException ex) {
-                //    Logger.getLogger(TraceAction.class.getName()).log(Level.SEVERE, null, ex);
-               // }
+                    
+                    window.getPannel().getMainPanel().createGraph(l);
+                    window.getPannel().getScroll().validate();
+                    window.getPannel().getScroll().repaint();
+                    
+                    //    tache.setAff(false);
+                    
+                    
+                    System.out.println("bbb");*/
+                    //} catch (InterruptedException ex) {
+                    //    Logger.getLogger(TraceAction.class.getName()).log(Level.SEVERE, null, ex);
+                    // }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(TraceAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
         
             

@@ -121,7 +121,7 @@ public class LoadAction extends AbstractAction {
                     System.out.println(nb);
                     for (int j=0; j<list.size(); j++)
                         System.out.println(list.get(j));
-                    panel.getGraph().constructGraph(list,0);
+                    panel.getGraph().constructGraph(list,0, list.size());
                     flag = 0;
                 }
                 
@@ -131,7 +131,7 @@ public class LoadAction extends AbstractAction {
         System.out.println(nb);
                     for (int j=0; j<list.size(); j++)
                         System.out.println(list.get(j));
-                 panel.getGraph().constructGraph(list,0);
+                 panel.getGraph().constructGraph(list,0, list.size());
                  scroll.repaint();
                 scroll.validate();
         
@@ -140,7 +140,7 @@ public class LoadAction extends AbstractAction {
     public void repaint(){
         panel.getGraph().clearGraph();
                  panel.removeAll();
-                 panel.add( panel.getGraph().constructGraph(new ArrayList<String>(),1));
+                 panel.add( panel.getGraph().constructGraph(new ArrayList<String>(),1,0));
                  scroll.repaint();
                 scroll.validate();
     }
