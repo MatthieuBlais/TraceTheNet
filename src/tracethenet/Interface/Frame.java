@@ -28,7 +28,7 @@ public class Frame extends JFrame {
         //Size and Title of the window
         setSize(SIZEX, SIZEY);
         setTitle(TITLE);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         panel = new Pannel(this);
         BarMenu b = new BarMenu(this, panel.getMainPanel(), panel.getScroll());
